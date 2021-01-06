@@ -870,7 +870,7 @@ test_rear_groom_clean <- test_rear_groom %>%
 hab_clean <-
   merge(hab_ref, hab_clean, by.x = "AnyMaze_Test", by.y = "Test")
 
-for (i in (length(hab_ref) + 1):(length(hab_clean) - 1)) {
+for (i in (length(hab_ref) + 1):(length(hab_clean))) {
   hab_clean[, i]  <- as.numeric(as.character(hab_clean[, i]))
 }
 
@@ -883,7 +883,7 @@ enc_clean <-
         by.x = "AnyMaze_Test",
         by.y = "Test")
 
-for (i in (length(enc_ref) + 1):(length(enc_clean) - 1)) {
+for (i in (length(enc_ref) + 1):(length(enc_clean))) {
   enc_clean[, i]  <- as.numeric(as.character(enc_clean[, i]))
 }
 
@@ -896,7 +896,7 @@ test_clean <-
         by.x = "AnyMaze_Test",
         by.y = "Test")
 
-for (i in (length(test_ref) + 1):(length(test_clean) - 1)) {
+for (i in (length(test_ref) + 1):(length(test_clean))) {
   test_clean[, i]  <- as.numeric(as.character(test_clean[, i]))
 }
 
