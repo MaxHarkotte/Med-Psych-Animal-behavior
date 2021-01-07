@@ -16,19 +16,21 @@ dataPath <-
 setwd(dataPath)
 
 # Create directories to store figures
-dir.create(paste0(dataPath, "Plots"))
-dir.create(paste0(dataPath, "Plots/Habituation"))
-dir.create(paste0(dataPath, "Plots/Habituation/Cumulative"))
-dir.create(paste0(dataPath, "Plots/Habituation/Non_cumulative"))
-dir.create(paste0(dataPath, "Plots/Habituation/General"))
-dir.create(paste0(dataPath, "Plots/Encoding"))
-dir.create(paste0(dataPath, "Plots/Encoding/Cumulative"))
-dir.create(paste0(dataPath, "Plots/Encoding/Non_cumulative"))
-dir.create(paste0(dataPath, "Plots/Encoding/General"))
-dir.create(paste0(dataPath, "Plots/Test"))
-dir.create(paste0(dataPath, "Plots/Test/Cumulative"))
-dir.create(paste0(dataPath, "Plots/Test/Non_cumulative"))
-dir.create(paste0(dataPath, "Plots/Test/General"))
+dir.create(paste0(dataPath, "Descriptives"))
+dir.create(paste0(dataPath, "Descriptives/Plots"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Habituation"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Habituation/General"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Encoding"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Encoding/General"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Test"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Test/Cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"))
+dir.create(paste0(dataPath, "Descriptives/Plots/Test/General"))
+dir.create(paste0(dataPath, "Descriptives/Tables"))
 
 # 2 - Read in data --------------------------------------------------------
 
@@ -81,6 +83,10 @@ Cum_hab_dist <-
       "Cum_dist_min_10"
     )
   )
+
+write.csv2(Cum_hab_dist,
+           file.path(dataPath, "Descriptives/Tables/Hab_Cum_Dist.csv"),
+           row.names = FALSE)
 
 Cum_hab_dist <-
   pivot_longer(
@@ -159,6 +165,10 @@ Bin_hab_dist <-
     )
   )
 
+write.csv2(Bin_hab_dist,
+           file.path(dataPath, "Descriptives/Tables/Hab_Bin_Dist.csv"),
+           row.names = FALSE)
+
 Bin_hab_dist <-
   pivot_longer(
     Bin_hab_dist,
@@ -222,14 +232,15 @@ Bin_hab_dist_plot
 
 ggsave(
   Cum_hab_dist_plot,
-  path = paste0(dataPath, "Plots/Habituation/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
   filename = "01-Distance.pdf"
 )
 ggsave(
   Bin_hab_dist_plot,
-  path = paste0(dataPath, "Plots/Habituation/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
   filename = "01-Distance.pdf"
 )
+
 
 
 # 02 - Velocity/ Mean speed -----------------------------------------------
@@ -252,6 +263,11 @@ Cum_hab_velo <-
       "Cum_velo_min_10"
     )
   )
+
+
+write.csv2(Cum_hab_velo,
+           file.path(dataPath, "Descriptives/Tables/Hab_Cum_Mean_Speed.csv"),
+           row.names = FALSE)
 
 Cum_hab_velo <-
   pivot_longer(
@@ -330,6 +346,12 @@ Bin_hab_velo <-
     )
   )
 
+
+write.csv2(Bin_hab_velo,
+           file.path(dataPath, "Descriptives/Tables/Hab_Bin_Mean_Speed.csv"),
+           row.names = FALSE)
+
+
 Bin_hab_velo <-
   pivot_longer(
     Bin_hab_velo,
@@ -393,19 +415,16 @@ Bin_hab_velo_plot
 
 ggsave(
   Cum_hab_velo_plot,
-  path = paste0(dataPath, "Plots/Habituation/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 ggsave(
   Bin_hab_velo_plot,
-  path = paste0(dataPath, "Plots/Habituation/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 
-
 # 03 - Time spent rearing  ------------------------------------------------
-
-
 Cum_hab_rear <-
   subset(
     hab,
@@ -424,6 +443,10 @@ Cum_hab_rear <-
       "Cum_rear_tim_10"
     )
   )
+
+write.csv2(Cum_hab_rear,
+           file.path(dataPath, "Descriptives/Tables/Hab_Cum_Rear_Time.csv"),
+           row.names = FALSE)
 
 Cum_hab_rear <-
   pivot_longer(
@@ -502,6 +525,10 @@ Bin_hab_rear <-
     )
   )
 
+write.csv2(Bin_hab_rear,
+           file.path(dataPath, "Descriptives/Tables/Hab_Bin_Rear_Time.csv"),
+           row.names = FALSE)
+
 Bin_hab_rear <-
   pivot_longer(
     Bin_hab_rear,
@@ -565,19 +592,17 @@ Bin_hab_rear_plot
 
 ggsave(
   Cum_hab_rear_plot,
-  path = paste0(dataPath, "Plots/Habituation/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 ggsave(
   Bin_hab_rear_plot,
-  path = paste0(dataPath, "Plots/Habituation/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 
 
 # 04 - Time spent grooming  -----------------------------------------------
-
-
 Cum_hab_groo <-
   subset(
     hab,
@@ -596,6 +621,10 @@ Cum_hab_groo <-
       "Cum_groo_tim_10"
     )
   )
+
+write.csv2(Cum_hab_groo,
+           file.path(dataPath, "Descriptives/Tables/Hab_Cum_Groom_Time.csv"),
+           row.names = FALSE)
 
 Cum_hab_groo <-
   pivot_longer(
@@ -674,6 +703,10 @@ Bin_hab_groo <-
     )
   )
 
+write.csv2(Bin_hab_groo,
+           file.path(dataPath, "Descriptives/Tables/Hab_Bin_Groom_Time.csv"),
+           row.names = FALSE)
+
 Bin_hab_groo <-
   pivot_longer(
     Bin_hab_groo,
@@ -737,12 +770,12 @@ Bin_hab_groo_plot
 
 ggsave(
   Cum_hab_groo_plot,
-  path = paste0(dataPath, "Plots/Habituation/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 ggsave(
   Bin_hab_groo_plot,
-  path = paste0(dataPath, "Plots/Habituation/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 
@@ -767,6 +800,10 @@ Cum_hab_rear_count <-
       "Cum_rear_cnt_10"
     )
   )
+
+write.csv2(Cum_hab_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Hab_Cum_Rear_Count.csv"),
+           row.names = FALSE)
 
 Cum_hab_rear_count <-
   pivot_longer(
@@ -845,6 +882,10 @@ Bin_hab_rear_count <-
     )
   )
 
+write.csv2(Bin_hab_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Hab_Bin_Rear_Count.csv"),
+           row.names = FALSE)
+
 Bin_hab_rear_count <-
   pivot_longer(
     Bin_hab_rear_count,
@@ -908,15 +949,14 @@ Bin_hab_rear_count_plot
 
 ggsave(
   Cum_hab_rear_count_plot,
-  path = paste0(dataPath, "Plots/Habituation/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
 ggsave(
   Bin_hab_rear_count_plot,
-  path = paste0(dataPath, "Plots/Habituation/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
-
 
 # 06 - Grooming onset -----------------------------------------------------
 Groom_onset <-
@@ -924,6 +964,10 @@ Groom_onset <-
          select = c("Animal",
                     "Habituation",
                     "Groo_latency"))
+
+write.csv2(Groom_onset,
+           file.path(dataPath, "Descriptives/Tables/Hab_Groom_Onset.csv"),
+           row.names = FALSE)
 
 Groom_onset_summary = describeBy(
   Groom_onset$Groo_latency,
@@ -961,10 +1005,9 @@ Groom_onset_plot
 
 ggsave(
   Groom_onset_plot,
-  path = paste0(dataPath, "Plots/Habituation/General"),
+  path = paste0(dataPath, "Descriptives/Plots/Habituation/General"),
   filename = "01-Grooming_Onset.pdf"
 )
-
 
 # Encoding ----------------------------------------------------------------
 # 01 - Distance traveled -------------------------------------------------
@@ -987,6 +1030,10 @@ Cum_enc_dist <-
       "Cum_dist_min_10"
     )
   )
+
+write.csv2(Cum_enc_dist,
+           file.path(dataPath, "Descriptives/Tables/Enc_Cum_Dist.csv"),
+           row.names = FALSE)
 
 Cum_enc_dist <-
   pivot_longer(
@@ -1066,6 +1113,10 @@ Bin_enc_dist <-
     )
   )
 
+write.csv2(Bin_enc_dist,
+           file.path(dataPath, "Descriptives/Tables/Enc_Bin_Dist.csv"),
+           row.names = FALSE)
+
 Bin_enc_dist <-
   pivot_longer(
     Bin_enc_dist,
@@ -1131,12 +1182,12 @@ Bin_enc_dist_plot
 
 ggsave(
   Cum_enc_dist_plot,
-  path = paste0(dataPath, "Plots/Encoding/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
   filename = "01-Distance.pdf"
 )
 ggsave(
   Bin_enc_dist_plot,
-  path = paste0(dataPath, "Plots/Encoding/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
   filename = "01-Distance.pdf"
 )
 
@@ -1159,6 +1210,10 @@ Cum_enc_velo <-
       "Cum_velo_min_10"
     )
   )
+
+write.csv2(Cum_enc_velo,
+           file.path(dataPath, "Descriptives/Tables/Enc_Cum_Mean_Speed.csv"),
+           row.names = FALSE)
 
 Cum_enc_velo <-
   pivot_longer(
@@ -1238,6 +1293,10 @@ Bin_enc_velo <-
     )
   )
 
+write.csv2(Bin_enc_velo,
+           file.path(dataPath, "Descriptives/Tables/Enc_Bin_Mean_Speed.csv"),
+           row.names = FALSE)
+
 Bin_enc_velo <-
   pivot_longer(
     Bin_enc_velo,
@@ -1302,12 +1361,12 @@ Bin_enc_velo_plot
 
 ggsave(
   Cum_enc_velo_plot,
-  path = paste0(dataPath, "Plots/Encoding/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 ggsave(
   Bin_enc_velo_plot,
-  path = paste0(dataPath, "Plots/Encoding/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 
@@ -1330,6 +1389,10 @@ Cum_enc_rear <-
       "Cum_rear_tim_10"
     )
   )
+
+write.csv2(Cum_enc_rear,
+           file.path(dataPath, "Descriptives/Tables/Enc_Cum_Rear_Time.csv"),
+           row.names = FALSE)
 
 Cum_enc_rear <-
   pivot_longer(
@@ -1409,6 +1472,10 @@ Bin_enc_rear <-
     )
   )
 
+write.csv2(Bin_enc_rear,
+           file.path(dataPath, "Descriptives/Tables/Enc_Bin_Rear_Time.csv"),
+           row.names = FALSE)
+
 Bin_enc_rear <-
   pivot_longer(
     Bin_enc_rear,
@@ -1473,12 +1540,12 @@ Bin_enc_rear_plot
 
 ggsave(
   Cum_enc_rear_plot,
-  path = paste0(dataPath, "Plots/Encoding/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 ggsave(
   Bin_enc_rear_plot,
-  path = paste0(dataPath, "Plots/Encoding/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 
@@ -1501,6 +1568,10 @@ Cum_enc_groo <-
       "Cum_groo_tim_10"
     )
   )
+
+write.csv2(Cum_enc_groo,
+           file.path(dataPath, "Descriptives/Tables/Enc_Cum_Groom_Time.csv"),
+           row.names = FALSE)
 
 Cum_enc_groo <-
   pivot_longer(
@@ -1580,6 +1651,10 @@ Bin_enc_groo <-
     )
   )
 
+write.csv2(Bin_enc_groo,
+           file.path(dataPath, "Descriptives/Tables/Enc_Bin_Groom_Time.csv"),
+           row.names = FALSE)
+
 Bin_enc_groo <-
   pivot_longer(
     Bin_enc_groo,
@@ -1644,12 +1719,12 @@ Bin_enc_groo_plot
 
 ggsave(
   Cum_enc_groo_plot,
-  path = paste0(dataPath, "Plots/Encoding/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 ggsave(
   Bin_enc_groo_plot,
-  path = paste0(dataPath, "Plots/Encoding/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 
@@ -1672,6 +1747,10 @@ Cum_enc_rear_count <-
       "Cum_rear_cnt_10"
     )
   )
+
+write.csv2(Cum_enc_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Enc_Cum_Rear_Count.csv"),
+           row.names = FALSE)
 
 Cum_enc_rear_count <-
   pivot_longer(
@@ -1751,6 +1830,10 @@ Bin_enc_rear_count <-
     )
   )
 
+write.csv2(Bin_enc_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Enc_Bin_Rear_Count.csv"),
+           row.names = FALSE)
+
 Bin_enc_rear_count <-
   pivot_longer(
     Bin_enc_rear_count,
@@ -1815,12 +1898,12 @@ Bin_enc_rear_count_plot
 
 ggsave(
   Cum_enc_rear_count_plot,
-  path = paste0(dataPath, "Plots/Encoding/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
 ggsave(
   Bin_enc_rear_count_plot,
-  path = paste0(dataPath, "Plots/Encoding/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
 
@@ -1830,6 +1913,10 @@ Groom_onset <-
          select = c("Animal",
                     "Task",
                     "Groo_latency"))
+
+write.csv2(Groom_onset,
+           file.path(dataPath, "Descriptives/Tables/Enc_Groom_Onset.csv"),
+           row.names = FALSE)
 
 Groom_onset_summary = describeBy(
   Groom_onset$Groo_latency,
@@ -1868,14 +1955,71 @@ Groom_onset_plot
 
 ggsave(
   Groom_onset_plot,
-  path = paste0(dataPath, "Plots/Encoding/General"),
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/General"),
   filename = "01-Grooming_Onset.pdf"
 )
 
 
 # 07 - Total object exploration time --------------------------------------
+Enc_total_exploration <-
+  subset(enc,
+         select = c("Animal",
+                    "Task",
+                    "Total_exp_time"))
 
+write.csv2(Enc_total_exploration,
+           file.path(dataPath, "Descriptives/Tables/Enc_Total_Obj_exploration.csv"),
+           row.names = FALSE)
+
+Enc_total_exploration_sum = describeBy(
+  Enc_total_exploration$Total_exp_time,
+  list(Enc_total_exploration$Task),
+  mat = TRUE,
+  digits = 2
+)
+
+Enc_total_exploratio_plot <-
+  ggplot(Enc_total_exploration_sum,
+         aes(x = group1, y = mean)) +
+  geom_bar(stat = 'identity',
+           position = dodge,
+           width = .8) +
+  geom_errorbar(limits, position = dodge, width = 0.3) +
+  theme_minimal() +
+  scale_y_continuous(name = "Total exploration time [s]",
+                     breaks = seq(0, 10, 2),
+                     limits = c(0, 10)) +
+  scale_x_discrete(
+    name = "Task",
+    labels = c(
+      paste0("OPR (N=", mean(Enc_total_exploration_sum$n), ")"),
+      paste0("NOR (N=", mean(Enc_total_exploration_sum$n), ")")
+    ),
+    limits = c("OPR", "NOR")
+  ) +
+  ggtitle("Encoding | Total exploration time") +
+  geom_hline(colour = "black",
+             yintercept = 0,
+             size = .1)
+
+Enc_total_exploratio_plot
+
+ggsave(
+  Enc_total_exploratio_plot,
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/General"),
+  filename = "02-Total_exploration_time.pdf"
+)
 # 08 - Exploration time per object ----------------------------------------
+Enc_exp_per_object <-
+  subset(enc,
+         select = c("Animal",
+                    "Task",
+                    "Cum_FrRi_exp_10",
+                    "Cum_BaLe_exp_10"))
+
+write.csv2(Enc_exp_per_object,
+           file.path(dataPath, "Descriptives/Tables/Enc_Exploration_per_object.csv"),
+           row.names = FALSE)
 
 # 09 - Exploration onset --------------------------------------------------
 
@@ -1898,6 +2042,10 @@ Cum_test_dist <-
       "Cum_dist_min_5"
     )
   )
+
+write.csv2(Cum_test_dist,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_Dist.csv"),
+           row.names = FALSE)
 
 Cum_test_dist <-
   pivot_longer(
@@ -1967,6 +2115,10 @@ Bin_test_dist <-
     )
   )
 
+write.csv2(Bin_test_dist,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_Dist.csv"),
+           row.names = FALSE)
+
 Bin_test_dist <-
   pivot_longer(
     Bin_test_dist,
@@ -2027,12 +2179,12 @@ Bin_test_dist_plot
 
 ggsave(
   Cum_test_dist_plot,
-  path = paste0(dataPath, "Plots/Test/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
   filename = "01-Distance.pdf"
 )
 ggsave(
   Bin_test_dist_plot,
-  path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "01-Distance.pdf"
 )
 
@@ -2050,6 +2202,10 @@ Cum_test_velo <-
       "Cum_velo_min_5"
     )
   )
+
+write.csv2(Cum_test_velo,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_Mean_Speed.csv"),
+           row.names = FALSE)
 
 Cum_test_velo <-
   pivot_longer(
@@ -2119,6 +2275,10 @@ Bin_test_velo <-
     )
   )
 
+write.csv2(Bin_test_velo,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_Mean_Speed.csv"),
+           row.names = FALSE)
+
 Bin_test_velo <-
   pivot_longer(
     Bin_test_velo,
@@ -2178,12 +2338,12 @@ Bin_test_velo_plot
 
 ggsave(
   Cum_test_velo_plot,
-  path = paste0(dataPath, "Plots/Test/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 ggsave(
   Bin_test_velo_plot,
-  path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "02-Mean_Speed.pdf"
 )
 
@@ -2201,6 +2361,10 @@ Cum_test_rear <-
       "Cum_rear_tim_5"
     )
   )
+
+write.csv2(Cum_test_rear,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_Rear_Time.csv"),
+           row.names = FALSE)
 
 Cum_test_rear <-
   pivot_longer(
@@ -2270,6 +2434,10 @@ Bin_test_rear <-
     )
   )
 
+write.csv2(Bin_test_rear,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_Rear_Time.csv"),
+           row.names = FALSE)
+
 Bin_test_rear <-
   pivot_longer(
     Bin_test_rear,
@@ -2329,12 +2497,12 @@ Bin_test_rear_plot
 
 ggsave(
   Cum_test_rear_plot,
-  path = paste0(dataPath, "Plots/Test/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 ggsave(
   Bin_test_rear_plot,
-  path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "03-Rearing_Time.pdf"
 )
 
@@ -2352,6 +2520,10 @@ Cum_test_groo <-
       "Cum_groo_tim_5"
     )
   )
+
+write.csv2(Cum_test_groo,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_Groom_Time.csv"),
+           row.names = FALSE)
 
 Cum_test_groo <-
   pivot_longer(
@@ -2421,6 +2593,10 @@ Bin_test_groo <-
     )
   )
 
+write.csv2(Bin_test_groo,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_Groom_Time.csv"),
+           row.names = FALSE)
+
 Bin_test_groo <-
   pivot_longer(
     Bin_test_groo,
@@ -2480,12 +2656,12 @@ Bin_test_groo_plot
 
 ggsave(
   Cum_test_groo_plot,
-  path = paste0(dataPath, "Plots/Test/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 ggsave(
   Bin_test_groo_plot,
-  path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "04-Grooming_Time.pdf"
 )
 
@@ -2503,6 +2679,10 @@ Cum_test_rear_count <-
       "Cum_rear_cnt_5"
     )
   )
+
+write.csv2(Cum_test_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_Rear_Count.csv"),
+           row.names = FALSE)
 
 Cum_test_rear_count <-
   pivot_longer(
@@ -2572,6 +2752,10 @@ Bin_test_rear_count <-
     )
   )
 
+write.csv2(Bin_test_rear_count,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_Rear_Count.csv"),
+           row.names = FALSE)
+
 Bin_test_rear_count <-
   pivot_longer(
     Bin_test_rear_count,
@@ -2631,12 +2815,12 @@ Bin_test_rear_count_plot
 
 ggsave(
   Cum_test_rear_count_plot,
-  path = paste0(dataPath, "Plots/Test/Cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
 ggsave(
   Bin_test_rear_count_plot,
-  path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "05-Rearing_Count.pdf"
 )
 
@@ -2646,6 +2830,10 @@ Groom_onset <-
          select = c("Animal",
                     "Task",
                     "Groo_latency"))
+
+write.csv2(Groom_onset,
+           file.path(dataPath, "Descriptives/Tables/Test_Groom_onset.csv"),
+           row.names = FALSE)
 
 Groom_onset_summary = describeBy(
   Groom_onset$Groo_latency,
@@ -2684,20 +2872,62 @@ Groom_onset_plot
 
 ggsave(
   Groom_onset_plot,
-  path = paste0(dataPath, "Plots/Test/General"),
+  path = paste0(dataPath, "Descriptives/Plots/Test/General"),
   filename = "01-Grooming_Onset.pdf"
 )
 
 # 07 - Total object exploration time --------------------------------------
+Test_total_exploration <-
+  subset(test,
+         select = c("Animal",
+                    "Task",
+                    "Total_exp_time"))
 
-# 08 - Exploration time per object ----------------------------------------
+write.csv2(Test_total_exploration,
+           file.path(dataPath, "Descriptives/Tables/Test_Total_Obj_exploration.csv"),
+           row.names = FALSE)
 
-# 09 - Exploration onset --------------------------------------------------
+Test_total_exploration_sum = describeBy(
+  Test_total_exploration$Total_exp_time,
+  list(Test_total_exploration$Task),
+  mat = TRUE,
+  digits = 2
+)
 
+Test_total_exploratio_plot <-
+  ggplot(Test_total_exploration_sum,
+         aes(x = group1, y = mean)) +
+  geom_bar(stat = 'identity',
+           position = dodge,
+           width = .8) +
+  geom_errorbar(limits, position = dodge, width = 0.3) +
+  theme_minimal() +
+  scale_y_continuous(name = "Total exploration time [s]",
+                     breaks = seq(0, 10, 2),
+                     limits = c(0, 10)) +
+  scale_x_discrete(
+    name = "Task",
+    labels = c(
+      paste0("OPR (N=", mean(Test_total_exploration_sum$n), ")"),
+      paste0("NOR (N=", mean(Test_total_exploration_sum$n), ")")
+    ),
+    limits = c("OPR", "NOR")
+  ) +
+  ggtitle("Test| Total exploration time") +
+  geom_hline(colour = "black",
+             yintercept = 0,
+             size = .1)
 
+Test_total_exploratio_plot
 
+ggsave(
+  Test_total_exploratio_plot,
+  path = paste0(dataPath, "Descriptives/Plots/Test/General"),
+  filename = "02-Total_exploration_time.pdf"
+)
+# 08 - Exploration onset --------------------------------------------------
 
-# 10 - Discrimination ratio -----------------------------------------------
+# 09 - Discrimination ratio -----------------------------------------------
 Cum_DR <-
   subset(
     test,
@@ -2711,6 +2941,10 @@ Cum_DR <-
       "Cum_DiRa_min_5"
     )
   )
+
+write.csv2(Cum_DR,
+           file.path(dataPath, "Descriptives/Tables/Test_Cum_DR.csv"),
+           row.names = FALSE)
 
 Cum_DR <-
   pivot_longer(Cum_DR,
@@ -2791,6 +3025,10 @@ Bin_DR <-
     )
   )
 
+write.csv2(Bin_DR,
+           file.path(dataPath, "Descriptives/Tables/Test_Bin_DR.csv"),
+           row.names = FALSE)
+
 Bin_DR <-
   pivot_longer(Bin_DR,
                cols = 3:7 ,
@@ -2803,7 +3041,7 @@ Bin_DR_sum = describeBy(Bin_DR$DR,
                         mat = TRUE,
                         digits = 2)
 
-DR_plot <-
+DR_bin_plot <-
   ggplot(data = Bin_DR_sum, aes(x = group2, y = mean, fill = group1)) +
   geom_bar(stat = 'identity',
            position = dodge,
@@ -2863,15 +3101,15 @@ DR_bin_lines
 
 
 ggsave(DR_Cum_plot,
-       path = paste0(dataPath, "Plots/Test/Cumulative"),
+       path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
        filename = "06-DR_point.pdf")
 ggsave(DR_Cum_lines,
-       path = paste0(dataPath, "Plots/Test/Cumulative"),
+       path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
        filename = "07-DR_spaghetti.pdf")
 
 ggsave(DR_bin_plot,
-       path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+       path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
        filename = "06-DR_point.pdf")
 ggsave(DR_bin_lines,
-       path = paste0(dataPath, "Plots/Test/Non_cumulative"),
+       path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
        filename = "07-DR_spaghetti.pdf")
