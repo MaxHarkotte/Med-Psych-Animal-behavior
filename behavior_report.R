@@ -237,7 +237,7 @@ Bin_hab_dist_plot
 ggsave(
   Cum_hab_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -246,7 +246,7 @@ ggsave(
 ggsave(
   Bin_hab_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -425,7 +425,7 @@ Bin_hab_velo_plot
 ggsave(
   Cum_hab_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -433,7 +433,7 @@ ggsave(
 ggsave(
   Bin_hab_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -612,7 +612,7 @@ Bin_hab_rear_plot
 ggsave(
   Cum_hab_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -621,7 +621,7 @@ ggsave(
 ggsave(
   Bin_hab_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -800,7 +800,7 @@ Bin_hab_groo_plot
 ggsave(
   Cum_hab_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -809,7 +809,7 @@ ggsave(
 ggsave(
   Bin_hab_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -988,7 +988,7 @@ Bin_hab_rear_count_plot
 ggsave(
   Cum_hab_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -997,7 +997,7 @@ ggsave(
 ggsave(
   Bin_hab_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1053,7 +1053,7 @@ Groom_onset_plot
 ggsave(
   Groom_onset_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/General"),
-  filename = "01-Grooming_Onset.pdf",
+  filename = "01-Grooming_Onset.png",
   width = 16, 
   height = 12, 
   units = "cm"
@@ -1236,7 +1236,7 @@ Bin_enc_dist_plot
 ggsave(
   Cum_enc_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1245,7 +1245,7 @@ ggsave(
 ggsave(
   Bin_enc_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1426,7 +1426,7 @@ Bin_enc_velo_plot
 ggsave(
   Cum_enc_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1435,7 +1435,7 @@ ggsave(
 ggsave(
   Bin_enc_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1616,7 +1616,7 @@ Bin_enc_rear_plot
 ggsave(
   Cum_enc_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1624,7 +1624,7 @@ ggsave(
 ggsave(
   Bin_enc_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1805,7 +1805,7 @@ Bin_enc_groo_plot
 ggsave(
   Cum_enc_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1814,7 +1814,7 @@ ggsave(
 ggsave(
   Bin_enc_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -1995,7 +1995,7 @@ Bin_enc_rear_count_plot
 ggsave(
   Cum_enc_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -2004,7 +2004,7 @@ ggsave(
 ggsave(
   Bin_enc_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/Non_cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 20, 
   height = 12, 
   units = "cm"
@@ -2061,7 +2061,7 @@ Groom_onset_plot
 ggsave(
   Groom_onset_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/General"),
-  filename = "01-Grooming_Onset.pdf",
+  filename = "01-Grooming_Onset.png",
   width = 12, 
   height = 12, 
   units = "cm"
@@ -2122,7 +2122,7 @@ Enc_total_exploratio_plot
 ggsave(
   Enc_total_exploratio_plot,
   path = paste0(dataPath, "Descriptives/Plots/Encoding/General"),
-  filename = "02-Total_exploration_time.pdf",
+  filename = "02-Total_exploration_time.png",
   width = 12, 
   height = 12, 
   units = "cm"
@@ -2308,7 +2308,7 @@ Bin_test_dist_plot
 ggsave(
   Cum_test_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2317,7 +2317,7 @@ ggsave(
 ggsave(
   Bin_test_dist_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "01-Distance.pdf",
+  filename = "01-Distance.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2478,7 +2478,7 @@ Bin_test_velo_plot
 ggsave(
   Cum_test_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2487,7 +2487,7 @@ ggsave(
 ggsave(
   Bin_test_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "02-Mean_Speed.pdf",
+  filename = "02-Mean_Speed.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2648,7 +2648,7 @@ Bin_test_rear_plot
 ggsave(
   Cum_test_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2657,7 +2657,7 @@ ggsave(
 ggsave(
   Bin_test_rear_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "03-Rearing_Time.pdf",
+  filename = "03-Rearing_Time.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2818,7 +2818,7 @@ Bin_test_groo_plot
 ggsave(
   Cum_test_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2827,7 +2827,7 @@ ggsave(
 ggsave(
   Bin_test_groo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "04-Grooming_Time.pdf",
+  filename = "04-Grooming_Time.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2988,7 +2988,7 @@ Bin_test_rear_count_plot
 ggsave(
   Cum_test_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -2997,7 +2997,7 @@ ggsave(
 ggsave(
   Bin_test_rear_count_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "05-Rearing_Count.pdf",
+  filename = "05-Rearing_Count.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -3054,7 +3054,7 @@ Groom_onset_plot
 ggsave(
   Groom_onset_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/General"),
-  filename = "01-Grooming_Onset.pdf",
+  filename = "01-Grooming_Onset.png",
   width = 12, 
   height = 12, 
   units = "cm"
@@ -3114,7 +3114,7 @@ Test_total_exploratio_plot
 ggsave(
   Test_total_exploratio_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/General"),
-  filename = "02-Total_exploration_time.pdf",
+  filename = "02-Total_exploration_time.png",
   width = 12, 
   height = 12, 
   units = "cm"
@@ -3323,7 +3323,7 @@ DR_bin_lines
 ggsave(
   DR_Cum_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "06-DR_point.pdf",
+  filename = "06-DR_point.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -3331,7 +3331,7 @@ ggsave(
 ggsave(
   DR_Cum_lines,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
-  filename = "07-DR_spaghetti.pdf",
+  filename = "07-DR_spaghetti.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -3340,7 +3340,7 @@ ggsave(
 ggsave(
   DR_bin_plot,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "06-DR_point.pdf",
+  filename = "06-DR_point.png",
   width = 19, 
   height = 12, 
   units = "cm"
@@ -3348,7 +3348,7 @@ ggsave(
 ggsave(
   DR_bin_lines,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
-  filename = "07-DR_spaghetti.pdf",
+  filename = "07-DR_spaghetti.png",
   width = 19, 
   height = 12, 
   units = "cm"
