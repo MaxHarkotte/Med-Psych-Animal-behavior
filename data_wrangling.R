@@ -383,7 +383,7 @@ enc_clean <- enc %>%
     Bin_FrRi_exp_8 = Bin_8..Rightfront_encoding...time.pressed,
     Bin_FrRi_exp_9 = Bin_9..Rightfront_encoding...time.pressed,
     Bin_FrRi_exp_10 = Bin_10..Rightfront_encoding...time.pressed,
-    FrRi_Latency = Rightfront_encoding...latency.1st.press,
+    FrRi_exp_Latency = Rightfront_encoding...latency.1st.press,
     Cum_BaLe_tim_1 = Cum_1..BL...time,
     Cum_BaLe_tim_2 = Cum_2..BL...time,
     Cum_BaLe_tim_3 = Cum_3..BL...time,
@@ -616,28 +616,28 @@ test_clean <- test %>%
     Bin_velo_min_3 = Bin_3..Mean.speed,
     Bin_velo_min_4 = Bin_4..Mean.speed,
     Bin_velo_min_5 = Bin_5..Mean.speed,
-    Cum_FrLe_exp_1 = Cum_1..LF...time.pressed,
-    Cum_FrLe_exp_2 = Cum_2..LF...time.pressed,
-    Cum_FrLe_exp_3 = Cum_3..LF...time.pressed,
-    Cum_FrLe_exp_4 = Cum_4..LF...time.pressed,
-    Cum_FrLe_exp_5 = Cum_5..LF...time.pressed,
-    Bin_FrLe_exp_1 = Bin_1..LF...time.pressed,
-    Bin_FrLe_exp_2 = Bin_2..LF...time.pressed,
-    Bin_FrLe_exp_3 = Bin_3..LF...time.pressed,
-    Bin_FrLe_exp_4 = Bin_4..LF...time.pressed,
-    Bin_FrLe_exp_5 = Bin_5..LF...time.pressed,
-    FrLe_Latency = LF...latency.1st.press,
-    Cum_BaRi_exp_1 = Cum_1..RB...time.pressed,
-    Cum_BaRi_exp_2 = Cum_2..RB...time.pressed,
-    Cum_BaRi_exp_3 = Cum_3..RB...time.pressed,
-    Cum_BaRi_exp_4 = Cum_4..RB...time.pressed,
-    Cum_BaRi_exp_5 = Cum_5..RB...time.pressed,
-    Bin_BaRi_exp_1 = Bin_1..RB...time.pressed,
-    Bin_BaRi_exp_2 = Bin_2..RB...time.pressed,
-    Bin_BaRi_exp_3 = Bin_3..RB...time.pressed,
-    Bin_BaRi_exp_4 = Bin_4..RB...time.pressed,
-    Bin_BaRi_exp_5 = Bin_5..RB...time.pressed,
-    BaRi_Latency = RB...latency.1st.press,
+    Cum_BaLe_exp_1 = Cum_1..Leftback_exploration...time.pressed,
+    Cum_BaLe_exp_2 = Cum_2..Leftback_exploration...time.pressed,
+    Cum_BaLe_exp_3 = Cum_3..Leftback_exploration...time.pressed,
+    Cum_BaLe_exp_4 = Cum_4..Leftback_exploration...time.pressed,
+    Cum_BaLe_exp_5 = Cum_5..Leftback_exploration...time.pressed,
+    Bin_BaLe_exp_1 = Bin_1..Leftback_exploration...time.pressed,
+    Bin_BaLe_exp_2 = Bin_2..Leftback_exploration...time.pressed,
+    Bin_BaLe_exp_3 = Bin_3..Leftback_exploration...time.pressed,
+    Bin_BaLe_exp_4 = Bin_4..Leftback_exploration...time.pressed,
+    Bin_BaLe_exp_5 = Bin_5..Leftback_exploration...time.pressed,
+    BaLe_exp_Latency = Leftback_exploration...latency.1st.press,
+    Cum_FrRi_exp_1 = Cum_1..Rightfront_exploration...time.pressed,
+    Cum_FrRi_exp_2 = Cum_2..Rightfront_exploration...time.pressed,
+    Cum_FrRi_exp_3 = Cum_3..Rightfront_exploration...time.pressed,
+    Cum_FrRi_exp_4 = Cum_4..Rightfront_exploration...time.pressed,
+    Cum_FrRi_exp_5 = Cum_5..Rightfront_exploration...time.pressed,
+    Bin_FrRi_exp_1 = Bin_1..Rightfront_exploration...time.pressed,
+    Bin_FrRi_exp_2 = Bin_2..Rightfront_exploration...time.pressed,
+    Bin_FrRi_exp_3 = Bin_3..Rightfront_exploration...time.pressed,
+    Bin_FrRi_exp_4 = Bin_4..Rightfront_exploration...time.pressed,
+    Bin_FrRi_exp_5 = Bin_5..Rightfront_exploration...time.pressed,
+    FrRi_exp_Latency = Rightfront_exploration...latency.1st.press,
     Cum_BaLe_tim_1 = Cum_1..BL...time,
     Cum_BaLe_tim_2 = Cum_2..BL...time,
     Cum_BaLe_tim_3 = Cum_3..BL...time,
@@ -904,7 +904,7 @@ for (i in (length(test_ref) + 1):(length(test_clean))) {
 enc_clean$Total_exp_time <-
   enc_clean$Cum_FrRi_exp_10 + enc_clean$Cum_BaLe_exp_10
 test_clean$Total_exp_time <-
-  test_clean$Cum_FrLe_exp_5 + test_clean$Cum_BaRi_exp_5
+  test_clean$Cum_BaLe_exp_5 + test_clean$Cum_FrRi_exp_5
 
 ## Calculate discrimination ratios for test session
 # Target (Trgt) position/object
@@ -931,55 +931,56 @@ test_clean$Cum_Cntl_exp_min_3 <- NA
 test_clean$Cum_Cntl_exp_min_4 <- NA
 test_clean$Cum_Cntl_exp_min_5 <- NA
 
+# Assign Cntrl and Trgt values
 for (row in 1:(nrow(test_clean))) {
   if (test_clean$Task[row] == "OPR") {
     if (test_clean$Unfamiliar_Position[row] == "RF" |
         test_clean$Unfamiliar_Position[row] == "RB") {
       # If unfamiliar position was on right side of OFA
-      test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-      test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-      test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-      test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-      test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-      test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-      test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-      test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-      test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-      test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+      test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+      test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+      test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+      test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+      test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+      test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+      test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+      test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+      test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+      test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
       
-      test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-      test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-      test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-      test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-      test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-      test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-      test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-      test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-      test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-      test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+      test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+      test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+      test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+      test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+      test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+      test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+      test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+      test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+      test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+      test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
     } else{
       # if unfamiliar position was on left side of OFA
-      test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-      test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-      test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-      test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-      test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-      test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-      test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-      test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-      test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-      test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+      test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+      test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+      test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+      test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+      test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+      test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+      test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+      test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+      test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+      test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
       
-      test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-      test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-      test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-      test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-      test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-      test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-      test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-      test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-      test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-      test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+      test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+      test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+      test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+      test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+      test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+      test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+      test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+      test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+      test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+      test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
     }
   } else{
     if (test_clean$Task[row] == "NOR") {
@@ -988,50 +989,50 @@ for (row in 1:(nrow(test_clean))) {
         # if both object were placed on the right side of OFA
         if (test_clean$Unfamiliar_Position[row] == "RB") {
           # unfamiliar object at the back
-          test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-          test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-          test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-          test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-          test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-          test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-          test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-          test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-          test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-          test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+          test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+          test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+          test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+          test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+          test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+          test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+          test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+          test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+          test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+          test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
           
-          test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-          test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-          test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-          test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-          test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-          test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-          test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-          test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-          test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-          test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+          test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+          test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+          test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+          test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+          test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+          test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+          test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+          test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+          test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+          test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
         } else{
           # unfamiliar object at the front
-          test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-          test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-          test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-          test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-          test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-          test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-          test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-          test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-          test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-          test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+          test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+          test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+          test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+          test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+          test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+          test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+          test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+          test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+          test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+          test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
           
-          test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-          test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-          test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-          test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-          test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-          test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-          test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-          test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-          test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-          test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+          test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+          test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+          test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+          test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+          test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+          test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+          test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+          test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+          test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+          test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
         }
       } else{
         if (substring(test_clean$Unfamiliar_Position[row], 1, 1) == "L" &
@@ -1039,99 +1040,99 @@ for (row in 1:(nrow(test_clean))) {
           # if both object were placed on the left side of OFA
           if (test_clean$Unfamiliar_Position[row] == "LB") {
             # unfamiliar object at the back
-            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
             
-            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
           } else{
             # unfamiliar object at the front
-            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
             
-            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
           }
         } else{
           # if objects on both, left and right side
           if (substring(test_clean$Unfamiliar_Position[row], 1, 1) == "L") {
             # unfamiliar object on left side
-            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
             
-            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
           } else{
             # unfamiliar object on right side
-            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_BaRi_exp_1[row]
-            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_BaRi_exp_2[row]
-            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_BaRi_exp_3[row]
-            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_BaRi_exp_4[row]
-            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_BaRi_exp_5[row]
-            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_BaRi_exp_1[row]
-            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_BaRi_exp_2[row]
-            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_BaRi_exp_3[row]
-            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_BaRi_exp_4[row]
-            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_BaRi_exp_5[row]
+            test_clean$Bin_Trgt_exp_min_1[row] = test_clean$Bin_FrRi_exp_1[row]
+            test_clean$Bin_Trgt_exp_min_2[row] = test_clean$Bin_FrRi_exp_2[row]
+            test_clean$Bin_Trgt_exp_min_3[row] = test_clean$Bin_FrRi_exp_3[row]
+            test_clean$Bin_Trgt_exp_min_4[row] = test_clean$Bin_FrRi_exp_4[row]
+            test_clean$Bin_Trgt_exp_min_5[row] = test_clean$Bin_FrRi_exp_5[row]
+            test_clean$Cum_Trgt_exp_min_1[row] = test_clean$Cum_FrRi_exp_1[row]
+            test_clean$Cum_Trgt_exp_min_2[row] = test_clean$Cum_FrRi_exp_2[row]
+            test_clean$Cum_Trgt_exp_min_3[row] = test_clean$Cum_FrRi_exp_3[row]
+            test_clean$Cum_Trgt_exp_min_4[row] = test_clean$Cum_FrRi_exp_4[row]
+            test_clean$Cum_Trgt_exp_min_5[row] = test_clean$Cum_FrRi_exp_5[row]
             
-            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_FrLe_exp_1[row]
-            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_FrLe_exp_2[row]
-            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_FrLe_exp_3[row]
-            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_FrLe_exp_4[row]
-            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_FrLe_exp_5[row]
-            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_FrLe_exp_1[row]
-            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_FrLe_exp_2[row]
-            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_FrLe_exp_3[row]
-            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_FrLe_exp_4[row]
-            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_FrLe_exp_5[row]
+            test_clean$Bin_Cntl_exp_min_1[row] = test_clean$Bin_BaLe_exp_1[row]
+            test_clean$Bin_Cntl_exp_min_2[row] = test_clean$Bin_BaLe_exp_2[row]
+            test_clean$Bin_Cntl_exp_min_3[row] = test_clean$Bin_BaLe_exp_3[row]
+            test_clean$Bin_Cntl_exp_min_4[row] = test_clean$Bin_BaLe_exp_4[row]
+            test_clean$Bin_Cntl_exp_min_5[row] = test_clean$Bin_BaLe_exp_5[row]
+            test_clean$Cum_Cntl_exp_min_1[row] = test_clean$Cum_BaLe_exp_1[row]
+            test_clean$Cum_Cntl_exp_min_2[row] = test_clean$Cum_BaLe_exp_2[row]
+            test_clean$Cum_Cntl_exp_min_3[row] = test_clean$Cum_BaLe_exp_3[row]
+            test_clean$Cum_Cntl_exp_min_4[row] = test_clean$Cum_BaLe_exp_4[row]
+            test_clean$Cum_Cntl_exp_min_5[row] = test_clean$Cum_BaLe_exp_5[row]
           }
         }
       }
@@ -1139,6 +1140,7 @@ for (row in 1:(nrow(test_clean))) {
   }
 }
 
+# Calculate DRs (time spent at target[novel] − time spent at control[familiar])/(time spent at target + time spent at control)
 test_clean$Bin_DiRa_min_1 <-
   (test_clean$Bin_Trgt_exp_min_1 - test_clean$Bin_Cntl_exp_min_1) / (test_clean$Bin_Trgt_exp_min_1 + test_clean$Bin_Cntl_exp_min_1)
 test_clean$Bin_DiRa_min_2 <-
@@ -1161,6 +1163,7 @@ test_clean$Cum_DiRa_min_4 <-
 test_clean$Cum_DiRa_min_5 <-
   (test_clean$Cum_Trgt_exp_min_5 - test_clean$Cum_Cntl_exp_min_5) / (test_clean$Cum_Trgt_exp_min_5 + test_clean$Cum_Cntl_exp_min_5)
 
+# If DR = NA (when no exploration was scored for time interval) insert DR = 0
 test_clean$Bin_DiRa_min_1[is.na(test_clean$Bin_DiRa_min_1)] <- 0
 test_clean$Bin_DiRa_min_2[is.na(test_clean$Bin_DiRa_min_2)] <- 0
 test_clean$Bin_DiRa_min_3[is.na(test_clean$Bin_DiRa_min_3)] <- 0
