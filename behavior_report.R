@@ -430,6 +430,7 @@ ggsave(
   height = 12, 
   units = "cm"
 )
+
 ggsave(
   Bin_hab_velo_plot,
   path = paste0(dataPath, "Descriptives/Plots/Habituation/Non_cumulative"),
@@ -2146,10 +2147,64 @@ write.csv2(
 )
 
 # 09 - Exploration onset --------------------------------------------------
+Exp_onset <-
+  subset(enc,
+         select = c("Animal",
+                    "Task",
+                    "FrRi_exp_Latency",
+                    "BaLe_exp_Latency"))
 
+Exp_onset$Onset <- pmin(Exp_onset$FrRi_exp_Latency, Exp_onset$BaLe_exp_Latency)
 
+write.csv2(
+  Exp_onset,
+  file.path(dataPath, "Descriptives/Tables/Enc_Exploration_Onset.csv"),
+  row.names = FALSE
+)
 
+Exp_onset_summary = describeBy(
+  Exp_onset$Onset,
+  list(Exp_onset$Task),
+  mat = TRUE,
+  digits = 2
+)
 
+Exp_onset_plot <-
+  ggplot(Exp_onset_summary,
+         aes(x = group1, y = mean)) +
+  geom_bar(stat = 'identity',
+           position = dodge,
+           width = .8) +
+  geom_errorbar(limits, position = dodge, width = 0.3) +
+  theme_minimal() +
+  scale_y_continuous(name = "Exploration Onset [s]",
+                     breaks = seq(0, 16, 4),
+                     limits = c(0, 16)) +
+  scale_x_discrete(
+    name = "Habituation",
+    labels = c(paste0(
+      "OPR (N=", mean(Bin_hab_dist_summary$n), ")"
+    ),
+    paste0(
+      "NOR (N=", mean(Bin_hab_dist_summary$n), ")"
+    )),
+    limits = c("OPR", "NOR")
+  ) +
+  ggtitle("Encoding | Exploration onset") +
+  geom_hline(colour = "black",
+             yintercept = 0,
+             size = .1)
+
+Exp_onset_plot
+
+ggsave(
+  Exp_onset_plot,
+  path = paste0(dataPath, "Descriptives/Plots/Encoding/General"),
+  filename = "03-Exploration_Onset.png",
+  width = 12, 
+  height = 12, 
+  units = "cm"
+)
 
 # Test --------------------------------------------------------------------
 # 01 - Distance traveled -------------------------------------------------
@@ -3121,6 +3176,64 @@ ggsave(
 )
 
 # 08 - Exploration onset --------------------------------------------------
+Exp_onset <-
+  subset(test,
+         select = c("Animal",
+                    "Task",
+                    "FrRi_exp_Latency",
+                    "BaLe_exp_Latency"))
+
+Exp_onset$Onset <- pmin(Exp_onset$FrRi_exp_Latency, Exp_onset$BaLe_exp_Latency)
+
+write.csv2(
+  Exp_onset,
+  file.path(dataPath, "Descriptives/Tables/test_Exploration_Onset.csv"),
+  row.names = FALSE
+)
+
+Exp_onset_summary = describeBy(
+  Exp_onset$Onset,
+  list(Exp_onset$Task),
+  mat = TRUE,
+  digits = 2
+)
+
+Exp_onset_plot <-
+  ggplot(Exp_onset_summary,
+         aes(x = group1, y = mean)) +
+  geom_bar(stat = 'identity',
+           position = dodge,
+           width = .8) +
+  geom_errorbar(limits, position = dodge, width = 0.3) +
+  theme_minimal() +
+  scale_y_continuous(name = "Exploration Onset [s]",
+                     breaks = seq(0, 70, 10),
+                     limits = c(0, 70)) +
+  scale_x_discrete(
+    name = "Habituation",
+    labels = c(paste0(
+      "OPR (N=", mean(Bin_hab_dist_summary$n), ")"
+    ),
+    paste0(
+      "NOR (N=", mean(Bin_hab_dist_summary$n), ")"
+    )),
+    limits = c("OPR", "NOR")
+  ) +
+  ggtitle("Test | Exploration onset") +
+  geom_hline(colour = "black",
+             yintercept = 0,
+             size = .1)
+
+Exp_onset_plot
+
+ggsave(
+  Exp_onset_plot,
+  path = paste0(dataPath, "Descriptives/Plots/Test/General"),
+  filename = "03-Exploration_Onset.png",
+  width = 12, 
+  height = 12, 
+  units = "cm"
+)
 
 # 09 - Discrimination ratio -----------------------------------------------
 Cum_DR <-
@@ -3159,13 +3272,13 @@ DR_Cum_plot <-
            position = dodge,
            width = .8) +
   geom_errorbar(limits, position = dodge, width = 0.3) +
-  geom_dotplot(
-    data = Cum_DR,
-    aes(x = Minute, y = DR, fill = Task),
-    binaxis = 'y',
-    stackdir = 'center',
-    dotsize = .5
-  ) +
+ geom_dotplot(
+   data = Cum_DR,
+   aes(x = Minute, y = DR, fill = Task),
+   binaxis = 'y',
+   stackdir = 'center',
+   dotsize = .5
+ ) +
   theme_classic() +
   scale_y_continuous(name = "DR",
                      breaks = seq(-1, 1, 0.1),
@@ -3191,6 +3304,35 @@ DR_Cum_plot <-
   geom_hline(colour = "black",
              yintercept = 0,
              size = .1)
+
+
+DR_Cum_bxp <- ggboxplot(
+  Cum_DR,
+  x = "Minute",
+  y = "DR",
+  color = "Task",
+  ggtheme = theme_classic(),
+  palette = c("dodgerblue3", "tomato3"),
+  add = "jitter",
+  shape = "Task"
+)+ 
+  scale_x_discrete(
+    name = "Minute",
+    labels = c("1", "2", "3", "4", "5"),
+    limits = c(
+      "Cum_DiRa_min_1",
+      "Cum_DiRa_min_2",
+      "Cum_DiRa_min_3",
+      "Cum_DiRa_min_4",
+      "Cum_DiRa_min_5"
+    )
+  )+
+  ggtitle("Test | Discrimination ratio (cumulative)") +
+  geom_hline(colour = "black",
+             linetype = 2,
+             yintercept = 0,
+             size = .1)
+DR_Cum_bxp
 
 
 Cum_DR$AniTreat <-  paste(Cum_DR$Animal, Cum_DR$Task)
@@ -3315,6 +3457,34 @@ DR_bin_lines <- ggplot(Bin_DR, aes(x = Minute, y = DR)) +
              yintercept = 0,
              size = .1)
 
+DR_Bin_bxp <- ggboxplot(
+  Bin_DR,
+  x = "Minute",
+  y = "DR",
+  color = "Task",
+  ggtheme = theme_classic(),
+  palette = c("dodgerblue3", "tomato3"),
+  add = "jitter",
+  shape = "Task"
+)+ 
+  scale_x_discrete(
+    name = "Minute",
+    labels = c("1", "2", "3", "4", "5"),
+    limits = c(
+      "Bin_DiRa_min_1",
+      "Bin_DiRa_min_2",
+      "Bin_DiRa_min_3",
+      "Bin_DiRa_min_4",
+      "Bin_DiRa_min_5"
+    )
+  )+
+  ggtitle("Test | Discrimination ratio (non cumulative)") +
+  geom_hline(colour = "black",
+             linetype = 2,
+             yintercept = 0,
+             size = .1)
+DR_Bin_bxp
+
 DR_Cum_plot
 DR_Cum_lines
 DR_bin_plot
@@ -3328,6 +3498,7 @@ ggsave(
   height = 12, 
   units = "cm"
 )
+
 ggsave(
   DR_Cum_lines,
   path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
@@ -3345,10 +3516,30 @@ ggsave(
   height = 12, 
   units = "cm"
 )
+
 ggsave(
   DR_bin_lines,
   path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
   filename = "07-DR_spaghetti.png",
+  width = 19, 
+  height = 12, 
+  units = "cm"
+)
+
+ggsave(
+  DR_Cum_bxp,
+  path = paste0(dataPath, "Descriptives/Plots/Test/Cumulative"),
+  filename = "08-DR_boxplot.png",
+  width = 19, 
+  height = 12, 
+  units = "cm"
+)
+
+
+ggsave(
+  DR_Bin_bxp,
+  path = paste0(dataPath, "Descriptives/Plots/Test/Non_cumulative"),
+  filename = "08-DR_boxplot.png",
   width = 19, 
   height = 12, 
   units = "cm"

@@ -362,7 +362,7 @@ enc_clean <- enc %>%
     Bin_BaLe_exp_8 = Bin_8..Leftback_encoding...time.pressed,
     Bin_BaLe_exp_9 = Bin_9..Leftback_encoding...time.pressed,
     Bin_BaLe_exp_10 = Bin_10..Leftback_encoding...time.pressed,
-    BaLe_Latency = Leftback_encoding...latency.1st.press,
+    BaLe_exp_Latency = Leftback_encoding...latency.1st.press,
     Cum_FrRi_exp_1 = Cum_1..Rightfront_encoding...time.pressed,
     Cum_FrRi_exp_2 = Cum_2..Rightfront_encoding...time.pressed,
     Cum_FrRi_exp_3 = Cum_3..Rightfront_encoding...time.pressed,
